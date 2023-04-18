@@ -15,6 +15,7 @@ CREATE TABLE livros (
   genero_livro INT, 
   descricao_livro VARCHAR(100),
   ISBN VARCHAR(25),
+  estado_livro_id INT,
   status BOOLEAN 
 );
 
@@ -23,24 +24,18 @@ CREATE TABLE editoras (
   nome_editora VARCHAR(50)
 );
 
+
+CREATE TABLE estado_livro (
+  codigo_estado_livro INT AUTO_INCREMENT PRIMARY KEY,
+  estado_livro VARCHAR(10)
+);
+
+
 CREATE TABLE generos (
   codigo_genero INT AUTO_INCREMENT PRIMARY KEY,
   nome_genero VARCHAR(30)
 );
 
-CREATE TABLE livro_genero(
-	codigo_livro int,
-	codigo_genero int,
-	FOREIGN KEY (codigo_livro) REFERENCES livros(codigo_livro),
-	FOREIGN KEY (codigo_genero) REFERENCES generos(codigo_genero)
-);
-	
-CREATE TABLE livro_editoras(
-	codigo_livro int, 
-	codigo_editora int,
-	FOREIGN KEY (codigo_livro) REFERENCES livros(codigo_livro),
-	FOREIGN KEY (codigo_editora) REFERENCES editoras(codigo_editora)
-);	
 
 CREATE TABLE autores (
   codigo_autor INT AUTO_INCREMENT PRIMARY KEY,
@@ -68,7 +63,8 @@ CREATE TABLE usuarios (
   complemento VARCHAR(20),
   cep VARCHAR(8),
   ativo BOOLEAN,
-  CONSTRAINT unique_codigo_usuario UNIQUE (codigo_usuario)
+  CONSTRAINT unique_codigo_usuario UNIQUE (codigo_usuario),
+  FOREIGN KEY (codigo_bairro) REFERENCES bairros(codigo_bairro)
 );
 
 
